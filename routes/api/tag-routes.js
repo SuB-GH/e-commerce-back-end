@@ -27,19 +27,25 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-  Product.findOne({
+  Tag.findOne({
     // be sure to include its associated Products
     where: {
       id: req.params.id
     },
     attributes: [
       'id',
-      'tag_name',
+      'tag_name'
       // look into this... [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
     ],
     //"include" associated models here
-  });
+  })
+    .then(dbProductData => res.json(dbProductData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 })
+
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
