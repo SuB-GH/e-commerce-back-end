@@ -81,11 +81,11 @@ router.post('/', (req, res) => {
       console.log(err);
       res.status(400).json(err);
     })
-    .then(dbProductData => res.json(dbProductData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+    // .then(dbProductData => res.json(dbProductData))
+    // .catch(err => {
+    //   console.log(err);
+    //   res.status(500).json(err);
+    // });
 });
 
 // update product
